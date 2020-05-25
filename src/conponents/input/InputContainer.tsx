@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { TextField, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { useDispatch } from "react-redux";
+import { fetchWeather } from "../../store/search/actions";
+import moment from "moment";
 
 interface IinputState {
   country: string;
@@ -8,12 +11,12 @@ interface IinputState {
 }
 
 export default function InputContainer() {
+  const dispatch = useDispatch();
   const initialState: IinputState = {
     country: "",
     city: "",
   };
   const [formdata, setFormdata] = useState(initialState);
-  console.log(formdata);
 
   const handleTextChange = (event: any) => {
     const { name, value } = event.target;
@@ -22,7 +25,31 @@ export default function InputContainer() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    const datesArr = tenDatesFromNow();
+    for (let i = 0; i < 10; i++) {
+      dispatch(fetchWeather(formdata, datesArr));
+    }
   };
+
+  // finding the next ten day dates
+  function tenDatesFromNow() {
+    let dateArr: any = [];
+    for (let i = 0; i < 10; i++) {
+      let current = new Date().getTime();
+      let newStartDate = new Date(current + 3600 * 1000 * 24 * i).toString();
+      let newEndDate = new Date(
+        current + 3600 * 1000 * 24 * (i + 1)
+      ).toString();
+      dateArr = [
+        ...dateArr,
+        {
+          start_date: moment(newStartDate).format().substring(0, 10),
+          end_date: moment(newEndDate).format().substring(0, 10),
+        },
+      ];
+    }
+    return dateArr;
+  }
 
   return (
     <div>
@@ -31,7 +58,7 @@ export default function InputContainer() {
           value={formdata.country}
           variant="outlined"
           name="country"
-          onChange={handleTextChange} 
+          onChange={handleTextChange}
           type="text"
           size="medium"
           label="Country"
@@ -45,7 +72,7 @@ export default function InputContainer() {
           size="medium"
           label="City"
         />
-        <IconButton>
+        <IconButton type="submit">
           <SearchIcon />
         </IconButton>
       </form>
