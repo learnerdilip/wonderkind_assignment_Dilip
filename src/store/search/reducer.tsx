@@ -1,18 +1,18 @@
 const initialState = {
   weatherData: [],
+  loading: false,
 };
 
 const weatherReducer = (state: any = initialState, action: any) => {
   switch (action.type) {
     case "WEATHER/FETCHED": {
-      if (state.weatherData) {
-        return {
-          ...state,
-          weatherData: [...state.weatherData, action.payload[0]],
-        };
-      } else {
-        return { ...state, weatherData: action.payload };
-      }
+      return {
+        ...state,
+        weatherData: action.payload,
+      };
+    }
+    case "SEARCHING": {
+      return { ...state, loading: !state.loading };
     }
     default: {
       return { ...state };

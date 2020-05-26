@@ -1,43 +1,77 @@
+// weather update
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid, Typography, LinearProgress } from "@material-ui/core";
+import { Grid, Typography, CircularProgress } from "@material-ui/core";
 
 export default function WeatherUpdate() {
   const weatherData = useSelector(
     (reduxState: any) => reduxState.weather.weatherData
   );
   const weekweather = [...weatherData];
-  console.log("#############", weatherData);
+  // console.log(weekweather);
+
+  // finding the average of next ten days
+  const tenDayAvg = Math.round(
+    weekweather.reduce((summation: any, day: any) => {
+      return summation + day.temp;
+    }, 0) / 10
+  );
+
+  const loading = useSelector((reduxState: any) => reduxState.weather.loading);
+
+  // the first day of the week will be today
+  const day = new Date().getDay();
+  const week = [
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
+    "MONDAY",
+    "TUESDAY",
+    "WEDNESDAY",
+    "THURSDAY",
+    "FRIDAY",
+    "SATURDAY",
+    "SUNDAY",
+  ];
 
   return (
     <div id="weatherDetails">
-      {weatherData.length < 10 && weatherData.length > 0 && (
-        <LinearProgress variant="determinate" value={weatherData.length * 10} />
+      <br />
+      {loading && weekweather.length !== 10 && (
+        <CircularProgress color="secondary" />
       )}
       {weatherData.length === 10 && (
         <Grid spacing={2} container lg={12}>
           <Grid item lg={12}>
-            <Typography variant="h6">7 DAYS</Typography>
+            <Typography
+              style={{ color: "rgba(0, 0, 0, 0.89)" }}
+              variant="h6"
+            >{`${weekweather[0].datetime.substring(
+              6,
+              14
+            )} to ${weekweather[9].datetime.substring(6, 14)}`}</Typography>
           </Grid>
           <Grid item lg={12}>
             <Typography variant="h1">
               <b>
                 {" "}
-                {Math.round(
-                  weekweather.reduce((summation: any, day: any) => {
-                    return summation + day.data.data[0].temp;
-                  }, 0) / 10
-                )}
+                {tenDayAvg}
                 <sup>&#8451;</sup>
               </b>
             </Typography>
           </Grid>
           <Grid item lg={12}>
             <div id="weekweather">
-              {weatherData.slice(0, 7).map((item: any) => (
-                <div id="dayweather">
-                  <p>weekday</p>
-                  <h4>{`${item.data.data[0].temp} `}&#8451;</h4>
+              {weatherData.slice(0, 7).map((item: any, index: any) => (
+                <div key={index} id="dayweather">
+                  <p style={{ color: "rgba(0, 0, 0, 0.89)" }}>
+                    {week[index + day - 1]}
+                  </p>
+                  <h4>{`${Math.round(item.temp)} `}&#8451;</h4>
                 </div>
               ))}
             </div>

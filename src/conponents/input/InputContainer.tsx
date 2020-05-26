@@ -1,9 +1,10 @@
+// Input container
 import React, { useState } from "react";
-import { TextField, IconButton, Grid } from "@material-ui/core";
+import { TextField, IconButton, Grid, Select } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useDispatch } from "react-redux";
 import { fetchWeather } from "../../store/search/actions";
-import moment from "moment";
+import countries from "../../countries.json";
 
 interface IinputState {
   country: string;
@@ -25,50 +26,37 @@ export default function InputContainer() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    const datesArr = tenDatesFromNow();
-    for (let i = 0; i < 10; i++) {
-      dispatch(fetchWeather(formdata, datesArr));
-    }
+    dispatch(fetchWeather(formdata));
+    dispatch({ type: "SEARCHING" });
   };
-
-  // finding the next ten day dates
-  function tenDatesFromNow() {
-    let dateArr: any = [];
-    for (let i = 0; i < 10; i++) {
-      let current = new Date().getTime();
-      let newStartDate = new Date(current + 3600 * 1000 * 24 * i).toString();
-      let newEndDate = new Date(
-        current + 3600 * 1000 * 24 * (i + 1)
-      ).toString();
-      dateArr = [
-        ...dateArr,
-        {
-          start_date: moment(newStartDate).format().substring(0, 10),
-          end_date: moment(newEndDate).format().substring(0, 10),
-        },
-      ];
-    }
-    return dateArr;
-  }
 
   return (
     <div id="inputsection">
       <form onSubmit={handleSubmit}>
         <Grid container lg={12}>
-          <Grid item lg={2}>
-            <TextField
+          <Grid item lg={1}>
+            <img src={require("../../images/c02d.png")} alt="cloud" />
+          </Grid>
+          <Grid item lg={3}>
+            <Select
               id="country"
               fullWidth
-              value={formdata.country}
+              native
               variant="outlined"
               name="country"
+              placeholder="Country"
+              value={formdata.country}
               onChange={handleTextChange}
-              type="text"
-              size="medium"
-              // label="Country"
-            />
+            >
+              <option aria-label="None" value="" />
+              {countries.map((item: any, index: any) => (
+                <option value={item.country_code} key={index}>
+                  {`${item.country_code}, ${item.country_name}`}
+                </option>
+              ))}
+            </Select>
           </Grid>
-          <Grid item lg={9}>
+          <Grid item lg={7}>
             <TextField
               fullWidth
               id="city"
@@ -78,7 +66,7 @@ export default function InputContainer() {
               onChange={handleTextChange}
               type="text"
               size="medium"
-              label="Please enter your location.."
+              placeholder="Please enter your location.."
             />
           </Grid>
           <Grid item lg={1}>
