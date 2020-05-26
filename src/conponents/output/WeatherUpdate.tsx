@@ -1,18 +1,20 @@
+// weather update
 import React from "react";
 import { useSelector } from "react-redux";
-import { Grid, Typography, LinearProgress } from "@material-ui/core";
+import { Grid, Typography, CircularProgress } from "@material-ui/core";
 
 export default function WeatherUpdate() {
   const weatherData = useSelector(
     (reduxState: any) => reduxState.weather.weatherData
   );
   const weekweather = [...weatherData];
-  console.log("#############", weatherData);
+
+  const loading = useSelector((reduxState: any) => reduxState.weather.loading);
 
   return (
     <div id="weatherDetails">
-      {weatherData.length < 10 && weatherData.length > 0 && (
-        <LinearProgress variant="determinate" value={weatherData.length * 10} />
+      {loading && weekweather.length !== 10 && (
+        <CircularProgress color="secondary" />
       )}
       {weatherData.length === 10 && (
         <Grid spacing={2} container lg={12}>
@@ -25,7 +27,7 @@ export default function WeatherUpdate() {
                 {" "}
                 {Math.round(
                   weekweather.reduce((summation: any, day: any) => {
-                    return summation + day.data.data[0].temp;
+                    return summation + day.temp;
                   }, 0) / 10
                 )}
                 <sup>&#8451;</sup>
@@ -34,10 +36,10 @@ export default function WeatherUpdate() {
           </Grid>
           <Grid item lg={12}>
             <div id="weekweather">
-              {weatherData.slice(0, 7).map((item: any) => (
-                <div id="dayweather">
+              {weatherData.slice(0, 7).map((item: any, index: any) => (
+                <div key={index} id="dayweather">
                   <p>weekday</p>
-                  <h4>{`${item.data.data[0].temp} `}&#8451;</h4>
+                  <h4>{`${Math.round(item.temp)} `}&#8451;</h4>
                 </div>
               ))}
             </div>

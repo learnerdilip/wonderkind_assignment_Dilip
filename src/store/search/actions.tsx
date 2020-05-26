@@ -1,24 +1,10 @@
 import { Dispatch } from "redux";
 import axios from "axios";
 
-export const fetchWeather = (formData: any, datesArr: any) => async (
-  dispatch: Dispatch
-) => {
-  let arrPromise: any = [];
-  for (let i = 0; i < 10; i++) {
-    console.log(datesArr[i]);
-    arrPromise = await [
-      ...arrPromise,
-      new Promise((resolve) =>
-        resolve(
-          axios.get(
-            `https://api.weatherbit.io/v2.0/history/daily?&city=${formData.city}&country=${formData.country}&start_date=${datesArr[i].start_date}&end_date=${datesArr[i].end_date}&key=${process.env.REACT_APP_API_KEY}`
-          )
-        )
-      ),
-    ];
-  }
-  Promise.all(arrPromise).then((values) =>
-    dispatch({ type: "WEATHER/FETCHED", payload: values })
+export const fetchWeather = (formData: any) => async (dispatch: Dispatch) => {
+  const response = await axios.get(
+    `https://api.weatherbit.io/v2.0/forecast/daily?&city=${formData.city}&country=${formData.country}&days=10&key=${process.env.REACT_APP_API_KEY}`
   );
+  console.log(response.data.data);
+  dispatch({ type: "WEATHER/FETCHED", payload: response.data.data });
 };
