@@ -4,15 +4,15 @@ import InputContainer from "./conponents/input/InputContainer";
 import WeatherUpdate from "./conponents/output/WeatherUpdate";
 
 function App() {
-  const randr = Math.round(Math.random() * 100);
-  const randb = Math.round(Math.random() * 100);
-  const blue = `#${randb}6755`;
-  const red = `#ff43${randr}`;
-  
+  const colds = ["lightblue", "skyblue", "#00ccff", "#8080ff", "#4dffff"];
+  const hots = ["orange", "pink", "tomato", "red", "#ff9933", "#ff0000"];
+
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(to right, ${blue}, ${red}`,
+        backgroundImage: `linear-gradient(to right, ${
+          hots[Math.round(Math.random() * 2)]
+        },  ${colds[Math.round(Math.random() * 2)]})`,
       }}
       className="App"
     >

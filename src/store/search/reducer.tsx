@@ -12,10 +12,13 @@ const weatherReducer = (state: any = initialState, action: any) => {
       };
     }
     case "ERROR": {
-      return { ...state, error: "Sorry! No such city in our database!" };
+      return { ...state, error: action.payload };
     }
     case "SEARCHING": {
       return { ...state, loading: !state.loading };
+    }
+    case "COLOR": {
+      return { ...state, color: action.payload };
     }
     default: {
       return { ...state };

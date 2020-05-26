@@ -1,4 +1,3 @@
-// weather update
 import React from "react";
 import { useSelector } from "react-redux";
 import { Grid, Typography, CircularProgress } from "@material-ui/core";
@@ -8,9 +7,8 @@ export default function WeatherUpdate() {
     (reduxState: any) => reduxState.weather.weatherData
   );
   const weekweather = weatherData ? [...weatherData] : [];
-  // console.log(useSelector((reduxState: any) => reduxState));
 
-  // erro handling
+  // ERROR handling
   const error = useSelector((reduxState: any) => reduxState.weather);
 
   // finding the average of next ten days
