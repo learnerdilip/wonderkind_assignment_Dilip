@@ -8,7 +8,14 @@ export default function WeatherUpdate() {
     (reduxState: any) => reduxState.weather.weatherData
   );
   const weekweather = [...weatherData];
-  console.log(weekweather);
+  // console.log(weekweather);
+
+  // finding the average of next ten days
+  const tenDayAvg = Math.round(
+    weekweather.reduce((summation: any, day: any) => {
+      return summation + day.temp;
+    }, 0) / 10
+  );
 
   const loading = useSelector((reduxState: any) => reduxState.weather.loading);
 
@@ -52,11 +59,7 @@ export default function WeatherUpdate() {
             <Typography variant="h1">
               <b>
                 {" "}
-                {Math.round(
-                  weekweather.reduce((summation: any, day: any) => {
-                    return summation + day.temp;
-                  }, 0) / 10
-                )}
+                {tenDayAvg}
                 <sup>&#8451;</sup>
               </b>
             </Typography>
