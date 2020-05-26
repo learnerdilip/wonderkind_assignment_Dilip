@@ -1,5 +1,5 @@
 .App {
-  background-image: linear-gradient(to right, #2d72de, #5685e1, #f9cb62);
+  /* background-image: linear-gradient(to right, #2d72de, #f44336); */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -8,10 +8,14 @@
   color: white;
 }
 
+#inputsection {
+  width: 50%;
+}
+
 form {
   background-color: aliceblue;
-  border: solid gray 2px;
   border-radius: 10px;
+  box-shadow: rgba(74, 74, 74, 0.2) 4px 4px 4px 4px;
 }
 
 #weatherDetails {
@@ -25,4 +29,19 @@ form {
 }
 #dayweather {
   width: 14%;
+}
+
+img {
+  object-fit: contain;
+  max-height: 100%;
+  width: 74%;
+}
+
+.MuiGrid-root.MuiGrid-item {
+  padding: 10px 0px;
+}
+
+.MuiOutlinedInput-root {
+  position: relative;
+  border: solid rgba(0, 0, 0, 0.1) 1px;
 }

@@ -34,7 +34,10 @@ export default function InputContainer() {
     <div id="inputsection">
       <form onSubmit={handleSubmit}>
         <Grid container lg={12}>
-          <Grid item lg={2}>
+          <Grid item lg={1}>
+            <img src={require("../../images/c02d.png")} alt="cloud" />
+          </Grid>
+          <Grid item lg={3}>
             <Select
               id="country"
               fullWidth
@@ -53,7 +56,7 @@ export default function InputContainer() {
               ))}
             </Select>
           </Grid>
-          <Grid item lg={9}>
+          <Grid item lg={7}>
             <TextField
               fullWidth
               id="city"
