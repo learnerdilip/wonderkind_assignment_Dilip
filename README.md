@@ -9,17 +9,25 @@
 - also displays the average temperature for the week starting TODAY
 - Background color changes on each search
 
-### Tech used: 
+### Tech used:
+
 - TypeScript
 - ReactJS
 - Redux for state management
 - Material UI
 
 #### Libraries used:
+
 - moment (for handling time)
 - axios (for making requests)
 
+## DEMO
+
+[]('./src/images/Wonderkind_weather_dilip.gif')
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+`npm install` to install all dependencies
 
 ## Available Scripts
 
