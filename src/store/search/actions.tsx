@@ -7,13 +7,12 @@ export const fetchWeather = (formData: any) => async (dispatch: Dispatch) => {
       `https://api.weatherbit.io/v2.0/forecast/daily?&city=${formData.city}&country=${formData.country}&days=10&key=${process.env.REACT_APP_API_KEY}`
     );
     // console.log(response.data.data);
-    if (response) {
+    if (response.data.data) {
       dispatch({ type: "WEATHER/FETCHED", payload: response.data.data });
     } else {
-      console.log("NO REUSLT");
-      return;
+      dispatch({ type: "ERROR" });
     }
-  } catch {
-    console.error(Error);
+  } catch (err) {
+    console.error("err");
   }
 };

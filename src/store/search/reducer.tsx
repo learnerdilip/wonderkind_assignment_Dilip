@@ -11,6 +11,9 @@ const weatherReducer = (state: any = initialState, action: any) => {
         weatherData: action.payload,
       };
     }
+    case "ERROR": {
+      return { ...state, error: "Sorry! No such city in our database!" };
+    }
     case "SEARCHING": {
       return { ...state, loading: !state.loading };
     }
