@@ -7,8 +7,8 @@ export default function WeatherUpdate() {
   const weatherData = useSelector(
     (reduxState: any) => reduxState.weather.weatherData
   );
-  const weekweather = [...weatherData];
-  // console.log(weekweather);
+  const weekweather = weatherData ? [...weatherData] : [];
+  console.log(weekweather);
 
   // finding the average of next ten days
   const tenDayAvg = Math.round(
@@ -41,10 +41,8 @@ export default function WeatherUpdate() {
   return (
     <div id="weatherDetails">
       <br />
-      {loading && weekweather.length !== 10 && (
-        <CircularProgress color="secondary" />
-      )}
-      {weatherData.length === 10 && (
+      {loading && !weekweather && <CircularProgress color="secondary" />}
+      {weekweather && weekweather.length === 10 && (
         <Grid spacing={2} container lg={12}>
           <Grid item lg={12}>
             <Typography

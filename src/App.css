@@ -15,7 +15,7 @@
 form {
   background-color: aliceblue;
   border-radius: 10px;
-  box-shadow: rgba(74, 74, 74, 0.2) 4px 4px 4px 4px;
+  box-shadow: rgba(24, 0, 69, 0.2) 4px 4px 4px 4px;
 }
 
 #weatherDetails {
@@ -39,9 +39,4 @@ img {
 
 .MuiGrid-root.MuiGrid-item {
   padding: 10px 0px;
-}
-
-.MuiOutlinedInput-root {
-  position: relative;
-  border: solid rgba(0, 0, 0, 0.1) 1px;
 }

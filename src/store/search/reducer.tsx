@@ -1,5 +1,5 @@
 const initialState = {
-  weatherData: [],
+  weatherData: null,
   loading: false,
 };
 

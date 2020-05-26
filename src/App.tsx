@@ -8,6 +8,7 @@ function App() {
   const randb = Math.round(Math.random() * 100);
   const blue = `#${randb}6755`;
   const red = `#ff43${randr}`;
+  
   return (
     <div
       style={{
