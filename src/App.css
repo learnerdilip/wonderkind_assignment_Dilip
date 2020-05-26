@@ -1,13 +1,28 @@
 .App {
-  background-image: linear-gradient(to right, tomato, white, cornflowerblue);
+  background-image: linear-gradient(to right, #2d72de, #5685e1, #f9cb62);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  color: white;
 }
 
 form {
   background-color: aliceblue;
   border: solid gray 2px;
   border-radius: 10px;
+}
+
+#weatherDetails {
+  text-align: center;
+  width: 70%;
+}
+
+#weekweather {
+  display: flex;
+  flex-direction: row;
+}
+#dayweather {
+  width: 14%;
 }

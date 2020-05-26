@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, IconButton } from "@material-ui/core";
+import { TextField, IconButton, Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useDispatch } from "react-redux";
 import { fetchWeather } from "../../store/search/actions";
@@ -52,29 +52,41 @@ export default function InputContainer() {
   }
 
   return (
-    <div>
+    <div id="inputsection">
       <form onSubmit={handleSubmit}>
-        <TextField
-          value={formdata.country}
-          variant="outlined"
-          name="country"
-          onChange={handleTextChange}
-          type="text"
-          size="medium"
-          label="Country"
-        />
-        <TextField
-          value={formdata.city}
-          variant="outlined"
-          name="city"
-          onChange={handleTextChange}
-          type="text"
-          size="medium"
-          label="City"
-        />
-        <IconButton type="submit">
-          <SearchIcon />
-        </IconButton>
+        <Grid container lg={12}>
+          <Grid item lg={2}>
+            <TextField
+              id="country"
+              fullWidth
+              value={formdata.country}
+              variant="outlined"
+              name="country"
+              onChange={handleTextChange}
+              type="text"
+              size="medium"
+              // label="Country"
+            />
+          </Grid>
+          <Grid item lg={9}>
+            <TextField
+              fullWidth
+              id="city"
+              value={formdata.city}
+              variant="outlined"
+              name="city"
+              onChange={handleTextChange}
+              type="text"
+              size="medium"
+              label="Please enter your location.."
+            />
+          </Grid>
+          <Grid item lg={1}>
+            <IconButton type="submit">
+              <SearchIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
       </form>
     </div>
   );

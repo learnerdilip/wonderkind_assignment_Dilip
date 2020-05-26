@@ -6,7 +6,7 @@ import WeatherUpdate from "./conponents/output/WeatherUpdate";
 function App() {
   return (
     <div className="App">
-      <InputContainer />
+      <InputContainer />      
       <WeatherUpdate />
     </div>
   );
