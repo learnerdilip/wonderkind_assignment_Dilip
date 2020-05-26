@@ -23,7 +23,7 @@
 
 ## DEMO
 
-[](/src/images/Wonderkind_weather_dilip.gif)
+![](/src/images/Wonderkind_weather_dilip.gif)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
