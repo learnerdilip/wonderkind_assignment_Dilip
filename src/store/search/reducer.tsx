@@ -17,9 +17,6 @@ const weatherReducer = (state: any = initialState, action: any) => {
     case "SEARCHING": {
       return { ...state, loading: !state.loading };
     }
-    case "COLOR": {
-      return { ...state, color: action.payload };
-    }
     default: {
       return { ...state };
     }

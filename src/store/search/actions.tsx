@@ -8,7 +8,6 @@ export const fetchWeather = (formData: any) => async (dispatch: Dispatch) => {
     );
     if (response.data.data) {
       dispatch({ type: "WEATHER/FETCHED", payload: response.data.data });
-      dispatch({ type: "COLOR" });
       dispatch({
         type: "ERROR",
         payload: null,

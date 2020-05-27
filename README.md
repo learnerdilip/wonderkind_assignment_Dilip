@@ -7,7 +7,7 @@
 - On top you see only the input bar and live results load below it
 - It displays temperature average for next 10 days
 - also displays the average temperature for the week starting TODAY
-- Background color changes on each search
+- Background color changes depending on the color (lighter color for lower temperatues)
 
 ### Tech used:
 

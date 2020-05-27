@@ -26,7 +26,9 @@ export default function InputContainer() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    dispatch(fetchWeather(formdata));
+    setTimeout(() => {
+      dispatch(fetchWeather(formdata));
+    }, 500);
     dispatch({ type: "SEARCHING" });
   };
 
